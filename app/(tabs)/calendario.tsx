@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Calendar } from 'react-native-calendars';
+import Footer from './footer';
 
 const App = () => {
   const [markedDates, setMarkedDates] = useState({});
@@ -39,7 +40,10 @@ const App = () => {
           todayTextColor: 'red',
         }}
       />
+
+      <Footer />
     </View>
+
   );
 };
 

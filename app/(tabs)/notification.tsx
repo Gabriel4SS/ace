@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, Text, TextInput, ScrollView, StyleSheet, Image } from 'react-native';
+import { View, Text, TextInput, ScrollView, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import Footer from './footer';
-import { useNavigation } from '@react-navigation/native';
+import { useRouter } from 'expo-router';
 
+const NotificationsScreen: React.FC = () => {
+  const router = useRouter();
 
-const NotificationsScreen: React.FC = ({ navigation }) => {
   // Simulação de dados recebidos do backend
   const notifications = [
     { id: 1, icon: 'user', title: 'José da Silva', message: 'Exemplo de mensagem' },
@@ -19,7 +20,9 @@ const NotificationsScreen: React.FC = ({ navigation }) => {
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <FontAwesome name="user-circle" size={24} color="black" />
+        <TouchableOpacity onPress={() => router.replace("/perfil")}>
+          <FontAwesome name="user-circle" size={24} color="black" />
+        </TouchableOpacity>
         <Text style={styles.headerTitle}>Notifications</Text>
         <FontAwesome name="ellipsis-v" size={24} color="black" />
       </View>
@@ -49,7 +52,7 @@ const NotificationsScreen: React.FC = ({ navigation }) => {
       </ScrollView>
 
       {/* Footer */}
-      <Footer navigate={navigation.navigate}/>
+      <Footer />
     </View>
   );
 };

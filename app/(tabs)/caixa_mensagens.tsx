@@ -1,6 +1,8 @@
 import React from 'react';
-import { View, Text, TextInput, ScrollView, Image, StyleSheet } from 'react-native';
+import { View, Text, TextInput, ScrollView, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
+import Footer from './footer';
+import { useRouter } from 'expo-router';
 
 interface Message {
   icon?: string;
@@ -38,11 +40,15 @@ const messages: Message[] = [
 ];
 
 const MessagesScreen: React.FC = () => {
+  const router = useRouter(); // Definir dentro do componente
+
   return (
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <FontAwesome name="user-circle" size={24} color="black" />
+        <TouchableOpacity onPress={() => router.replace("/perfil")}>
+          <FontAwesome name="user-circle" size={24} color="black" />
+        </TouchableOpacity>
         <Text style={styles.headerTitle}>Messages</Text>
         <FontAwesome name="ellipsis-v" size={24} color="black" />
       </View>
@@ -75,28 +81,7 @@ const MessagesScreen: React.FC = () => {
       </ScrollView>
 
       {/* Footer */}
-      <View style={styles.footer}>
-        <View style={styles.footerIcon}>
-          <FontAwesome name="bell" size={24} color="black" />
-          <Text style={styles.footerText}>notification</Text>
-        </View>
-        <View style={styles.footerIcon}>
-          <FontAwesome name="users" size={24} color="black" />
-          <Text style={styles.footerText}>team</Text>
-        </View>
-        <View style={styles.footerIcon}>
-          <FontAwesome name="comment" size={24} color="black" />
-          <Text style={styles.footerText}>messages</Text>
-        </View>
-        <View style={styles.footerIcon}>
-          <FontAwesome name="calendar-alt" size={24} color="black" />
-          <Text style={styles.footerText}>calendar</Text>
-        </View>
-        <View style={styles.footerIcon}>
-          <FontAwesome name="tasks" size={24} color="black" />
-          <Text style={styles.footerText}>activities</Text>
-        </View>
-      </View>
+      <Footer />
     </View>
   );
 };

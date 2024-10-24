@@ -2,14 +2,20 @@
 import React from 'react';
 import { View, Text, TextInput, Button, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
+import Footer from './footer';
+import { useRouter } from 'expo-router';
 
 export default function App() {
+  const router = useRouter();
+
   return (
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <FontAwesome name="user-circle" size={24} color="black" />
-        <Text style={styles.headerText}>Activities</Text>
+        <TouchableOpacity onPress={() => router.replace("/perfil")}>
+          <FontAwesome name="user-circle" size={24} color="black" />
+        </TouchableOpacity>
+        <Text> Activities</Text>
         <FontAwesome name="ellipsis-v" size={24} color="black" />
       </View>
 
@@ -56,15 +62,7 @@ export default function App() {
       </ScrollView>
 
       {/* Footer Navigation */}
-      <View style={styles.footer}>
-        <FontAwesome name="bell" size={24} color="gray" />
-        <FontAwesome name="users" size={24} color="gray" />
-        <FontAwesome name="comment-dots" size={24} color="gray" />
-        <FontAwesome name="calendar-alt" size={24} color="gray" />
-        <TouchableOpacity style={styles.plusButton}>
-          <FontAwesome name="plus-circle" size={40} color="black" />
-        </TouchableOpacity>
-      </View>
+      <Footer/>
     </View>
   );
 }

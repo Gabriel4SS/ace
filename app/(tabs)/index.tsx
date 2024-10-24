@@ -1,15 +1,19 @@
 import React from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
-import { endAsyncEvent } from 'react-native/Libraries/Performance/Systrace';
 import Footer from './footer';
+import { useRouter } from 'expo-router';
 
 const TeamScreen: React.FC = () => {
+  const router = useRouter();
+
   return (
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <FontAwesome name="user" size={24} color="black" />
+        <TouchableOpacity onPress={() => router.replace("/perfil")}>
+          <FontAwesome name="user-circle" size={24} color="black" />
+        </TouchableOpacity>
         <Text style={styles.headerTitle}>Team</Text>
         <FontAwesome name="ellipsis-v" size={24} color="black" />
       </View>
@@ -64,17 +68,16 @@ const TeamScreen: React.FC = () => {
             <Text>Produto 1</Text>
             <Text>Produto 2</Text>
           </View>
-          
         </View>
       </ScrollView>
 
-      {/* Footer */}
+      {/* Add Button */}
       <TouchableOpacity style={styles.addButton}>
-          <FontAwesome name="plus" size={24} color="black" />
-        </TouchableOpacity>
+        <FontAwesome name="plus" size={24} color="black" onPress={() => router.replace("/novo_time")}/>
+      </TouchableOpacity>
 
-      <Footer></Footer>
-      
+      {/* Footer */}
+      <Footer />
     </View>
   );
 };
@@ -158,11 +161,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#D1D5DB',
     padding: 10,
     borderRadius: 50,
-    marginLeft: "80%", 
-    marginRight: "5%",
-    alignItems: "center" 
-
-},
+    marginLeft: '80%',
+    marginRight: '5%',
+    alignItems: 'center',
+  },
 });
 
 export default TeamScreen;

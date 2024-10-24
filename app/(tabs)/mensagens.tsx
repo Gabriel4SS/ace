@@ -46,10 +46,11 @@ const App = () => {
                     <View key={index} style={styles.messageWrapper}>
                         {message.type === "sent" ? (
                             <View style={[styles.messageBubble, styles.sentMessage]}>
-                                {message.file ? <FontAwesome name="file-alt" size={16} color="white" style={styles.iconSpacing} /> : null}
-                                <Text style={styles.messageText}>{message.text}</Text>
-                                {message.file ? <FontAwesome name="download" size={16} color="white" style={styles.iconSpacing} /> : null}
-                            </View>
+                            {message.file ? <FontAwesome name="file" size={16} color="black" style={styles.iconSpacing} /> : null}
+                            <Text style={styles.messageText}>{message.text}</Text>
+                            {message.file ? <FontAwesome name="download" size={16} color="black" style={styles.iconSpacing} /> : null}
+                        </View>
+                        
                         ) : (
                             <View style={[styles.messageBubble, styles.receivedMessage]}>
                                 <Text style={styles.messageText}>{message.text}</Text>
@@ -82,9 +83,14 @@ const styles = StyleSheet.create({
         shadowRadius: 2,
         elevation: 5,
     },
+
     headerTitle: {
         fontSize: 18,
         fontWeight: 'bold',
+    },
+    messageText: {
+        fontSize: 16,
+        color: '#000', 
     },
     searchBar: {
         flexDirection: 'row',
@@ -124,7 +130,7 @@ const styles = StyleSheet.create({
         marginLeft: 'auto',
     },
     iconSpacing: {
-        marginLeft: 10,
+        marginHorizontal: 5
     },
     messageWrapper: {
         marginBottom: 10,
@@ -133,19 +139,21 @@ const styles = StyleSheet.create({
         padding: 12,
         borderRadius: 20,
         maxWidth: '80%',
+        flexDirection: 'row',  
+        alignItems: 'center',  
     },
+    
     sentMessage: {
         backgroundColor: '#3b82f6',
         alignSelf: 'flex-end',
+        color: 'black'
     },
     receivedMessage: {
         backgroundColor: '#e5e7eb',
         alignSelf: 'flex-start',
+        color: 'black'
     },
-    messageText: {
-        fontSize: 16,
-        color: '#fff',
-    },
+
     footer: {
         flexDirection: 'row',
         justifyContent: 'space-around',
