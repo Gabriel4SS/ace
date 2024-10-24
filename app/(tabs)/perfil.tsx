@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, ScrollView, Button } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import Footer from './footer';
+import { router } from 'expo-router';
 
 const ProfileScreen: React.FC = () => {
   return (
@@ -42,6 +43,12 @@ const ProfileScreen: React.FC = () => {
         {/* Edit Button */}
         <TouchableOpacity style={styles.editButton}>
           <Text>Editar Informações</Text>
+        </TouchableOpacity>
+        {/* Logout Button */}
+        <TouchableOpacity style={styles.logoutButton}
+          onPress={() => router.replace("/login")}
+          >
+          <Text>Sair</Text>
         </TouchableOpacity>
       </ScrollView>
 
@@ -104,6 +111,13 @@ const styles = StyleSheet.create({
   editButton: {
     padding: 12,
     backgroundColor: '#D1D5DB',
+    borderRadius: 50,
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  logoutButton: {
+    padding: 12,
+    backgroundColor: '#6babd3',
     borderRadius: 50,
     alignItems: 'center',
     marginBottom: 16,

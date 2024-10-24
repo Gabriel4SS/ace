@@ -1,9 +1,33 @@
-import React from 'react';
-import { View, Text, TextInput, ScrollView, TouchableOpacity, StyleSheet, Picker } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TextInput, ScrollView, TouchableOpacity, StyleSheet, Picker, Alert } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import Footer from './footer';
+import { router } from 'expo-router';
+import axios from 'axios';
 
 const NewTeamScreen: React.FC = () => {
+  const [nome, setNome] = useState('');
+  const [descricao, setDescricao] = useState('');
+
+  const handleSubmit = async () => {
+    if (!nome || !descricao) {
+      Alert.alert('Erro', 'Por favor, preencha todos os campos.');
+      return;
+    }
+
+    const formData = {
+      // id: 1,  ID do usuário logado
+      nome,
+      descricao,
+    };
+    try {
+      await axios.post('http://localhost:8080/grupos', formData);
+      router.replace("/");
+    } catch (error: any) {
+      Alert.alert('Erro ao cadastrar', error.response ? error.response.data : 'Erro desconhecido');
+    }
+  }
+
   return (
     <View style={styles.container}>
       {/* Header */}
@@ -27,15 +51,21 @@ const NewTeamScreen: React.FC = () => {
 
           <View style={styles.formGroup}>
             <Text style={styles.label}>Titulo do canal:</Text>
-            <TextInput style={styles.input} placeholder="Digite o título" />
+            <TextInput style={styles.input}
+              value={nome}
+              onChangeText={setNome}
+              placeholder="Digite o título" />
           </View>
 
           <View style={styles.formGroup}>
             <Text style={styles.label}>Descrição:</Text>
             <TextInput
               style={[styles.input, styles.textArea]}
+              value={descricao}
+              onChangeText={setDescricao}
               placeholder="Digite a descrição"
               multiline={true}
+              numberOfLines={4}
             />
           </View>
 
@@ -55,10 +85,10 @@ const NewTeamScreen: React.FC = () => {
 
           {/* Buttons */}
           <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={() => handleSubmit()}>
               <Text style={styles.buttonText}>Concluir</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.button, styles.cancelButton]}>
+            <TouchableOpacity style={[styles.button, styles.cancelButton]} onPress={() => router.navigate("/")}>
               <Text style={styles.buttonText}>Cancelar</Text>
             </TouchableOpacity>
           </View>

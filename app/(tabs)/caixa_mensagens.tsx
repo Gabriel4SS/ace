@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, ScrollView, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, ScrollView, Image, StyleSheet, TouchableOpacity, Pressable } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import Footer from './footer';
 import { useRouter } from 'expo-router';
@@ -72,10 +72,10 @@ const MessagesScreen: React.FC = () => {
             ) : (
               <FontAwesome name={msg.icon} size={24} style={styles.icon} />
             )}
-            <View style={styles.messageContent}>
+            <Pressable style={styles.messageContent} onPress={() => router.replace("/(tabs)/mensagens")}>
               <Text style={styles.messageName}>{msg.name}</Text>
               <Text style={styles.messageText}>{msg.message}</Text>
-            </View>
+            </Pressable>
           </View>
         ))}
       </ScrollView>
