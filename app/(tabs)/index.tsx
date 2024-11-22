@@ -72,7 +72,7 @@ const TeamScreen: React.FC = () => {
       </ScrollView>
 
       {/* Add Button */}
-      <TouchableOpacity style={styles.addButton}>
+      <TouchableOpacity style={styles.addButton} onPress={() => router.navigate("/novo_time")}>
         <FontAwesome name="plus" size={24} color="black" onPress={() => router.replace("/novo_time")}/>
       </TouchableOpacity>
 
